@@ -140,6 +140,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'myApp.Login'
 
+from dotenv import load_dotenv
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(os.path.join(BASE_DIR, ".env"))
+
+SECRET_KEY = os.getenv("SECRET_KEY")
+
 
 import mimetypes
 mimetypes.add_type("text/css", ".css", True)
