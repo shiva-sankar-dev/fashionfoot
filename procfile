@@ -1,1 +1,1 @@
-web: python manage.py migrate && gunicorn fashionfoot.wsgi --log-file -
+web: gunicorn fashionfoot.wsgi --log-file -
