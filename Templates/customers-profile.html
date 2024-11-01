@@ -39,7 +39,7 @@
                                                 <div class="grid grid-cols-1">
                                                     <div class="sm:-mx-6 lg:-mx-8">
                                                         {% if ordercount  < 1 %}
-                                                        <div class="emptycart container mt-5  ">your cart is empty</div>
+                                                        <div class="emptycart container mt-5  ">your order is empty</div>
 
                                                          {% else %}
                                                         <div class="relative overflow-x-auto block w-full sm:px-6 lg:px-8">
@@ -52,9 +52,9 @@
                                                                         <th scope="col" class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase">
                                                                             Product & Title
                                                                         </th>
-                                                                        <th scope="col" class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase">
+                                                                        {% comment %} <th scope="col" class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase">
                                                                             Stock
-                                                                        </th>
+                                                                        </th> {% endcomment %}
                                                                        
                                                                         <th scope="col" class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase">
                                                                             Date
@@ -87,13 +87,13 @@
                                                                                 </div>
                                                                             </div>
                                                                         </td>
-                                                                        <td class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                                                        {% comment %} <td class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                                                                             {% if d.product_id.number_of_items >  0 %}
                                                                             <span class="bg-green-600/5 text-green-600 text-[11px] font-medium px-2.5 py-0.5 rounded h-5">In stock</span>
                                                                             {% else %}
                                                                             <span class="bg-red-600/5 text-red-600 text-[11px] font-medium px-2.5 py-0.5 rounded h-5">Out of stock</span>
                                                                             {% endif %}
-                                                                        </td>                                                                       
+                                                                        </td>                                                                        {% endcomment %}
                                                                        
                                                                         <td class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                                                                             {{d.cdate}}

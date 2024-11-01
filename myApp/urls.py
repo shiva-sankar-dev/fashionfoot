@@ -6,7 +6,7 @@ urlpatterns = [
 
     path('registration/',views.registration,name='user-registration'),
     path('login/',views.customerslogin,name='user-login'),
-    path('dash/',views.dashboard),
+    # path('dash/',views.dashboard),
     path('product/',views.product,name='products'),
     path('add-product/',views.addproduct,name='add-product'),
     path('customer-home/',views.customershome,name='customers-home'),

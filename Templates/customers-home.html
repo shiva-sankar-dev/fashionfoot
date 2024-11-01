@@ -7,6 +7,7 @@
         <meta  name="viewport"  content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
         <meta  content="Tailwind Multipurpose Admin & Dashboard Template"  name="description"/>
         <meta content="" name="Mannatthemes" />
+        <link rel="icon" type="image/png" href="{% static 'assets/images/logos/logo.png' %}" />
 
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <!-- App favicon -->
@@ -43,9 +44,10 @@
           <div class="border-b dark:border-slate-700/40 lg:py-3 bg-[#EEF0FC]">
             <div class="container mx-auto">
               <div class="relative -mx-4 flex items-center justify-center sm:justify-between">
-                <div class="w-64 max-w-full px-4 sm:w-60 lg:w-48">
+                <div class="w-10 max-w-full px-4 sm:w-60 lg:w-48">
                   <a href="{% url "customers-home-content" %}" class="block w-full py-5 lg:py-3">
-                    <span style="color: darkorchid;font-size: 1.6em;font-weight: bolder;">FASHION</span><span style="font-size: 1.6em;font-weight: bolder;">FOOT</span>
+                    <span style="color: darkorchid;font-size: 1.7em;font-weight: bolder;">FASHION</span>
+                    <span style="font-size: 1em;font-weight: bolder;">FOOT</span>
                   </a>
                 </div>
                 <div class="w-full items-center justify-end px-4 sm:flex lg:justify-between">
@@ -132,11 +134,10 @@
                         id="user-profile"
                         aria-expanded="false"
                          data-fc-autoclose="both" data-fc-type="dropdown">
-                       <img
-                          class="h-8 w-8 rounded-full"
-                          src="/static/media/{{dp.img1}}"
-                          alt="user photo"
-                          /> 
+                         <img 
+                         class="h-8 w-8 rounded-full"
+                         src="{% if dp.img1 %}/static/media/{{ dp.img1 }}{% else %}{% static 'media/profile-image/default-img.jpg' %}{% endif %}" 
+                         alt="User Profile Picture"/>
                         <span class="ltr:ms-2 rtl:ms-0 rtl:me-2 hidden text-left xl:block">
                           <span class="block font-medium text-slate-600 dark:text-gray-300">{{customername}}</span>
                         </span>
@@ -206,22 +207,24 @@
                           <a href="{% url "customers-products" %}" class="flex justify-between py-2 text-base font-medium text-dark hover:text-brand lg:mx-5 lg:inline-flex lg:py-6 2xl:mx-6">
                             Products
                           </a>
-                        </li>{% if user.is_authenticated %}
+                        </li>
+                        {% comment %} {% if user.is_authenticated %}
                         <li>
                           <a href="{% url 'wishlist' %}" class="flex justify-between py-2 text-base font-medium text-dark hover:text-brand lg:mx-5 lg:inline-flex lg:py-6 2xl:mx-6">
                             Wishlist
                           </a>
-                        </li> {% endif %}
+                        </li> {% endif %} {% endcomment %}
                         <li>
                           <a href="{% url "store" %}" class="flex justify-between py-2 text-base font-medium text-dark hover:text-brand lg:mx-5 lg:inline-flex lg:py-6 2xl:mx-6">
                             Stores
                           </a>
-                        </li>{% if user.is_authenticated %}
+                        </li>
+                        {% comment %} {% if user.is_authenticated %}
                         <li>
                           <a href="{% url "customers-checkout"  %}" class="flex justify-between py-2 text-base font-medium text-dark hover:text-brand lg:mx-5 lg:inline-flex lg:py-6 2xl:mx-6">
                             Checkout
                           </a>
-                        </li>{% endif %}
+                        </li>{% endif %} {% endcomment %}
                         <li>
                           <a href="{% url "contact" %}" class="flex justify-between py-2 text-base font-medium text-dark hover:text-brand lg:mx-5 lg:inline-flex lg:py-6 2xl:mx-6">
                             Contact us

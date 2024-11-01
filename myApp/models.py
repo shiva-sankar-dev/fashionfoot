@@ -35,7 +35,7 @@ class contact(models.Model):
     
 
 class products(models.Model):
-    id=models.IntegerField(primary_key=True)
+    # id=models.IntegerField(primary_key=True)
     product_name=models.TextField(max_length=100,null=True)
     product_desc=models.TextField(max_length=300,null=True)
     product_category=models.TextField(max_length=300,null=True)

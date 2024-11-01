@@ -15,14 +15,14 @@
                                 
                                 
                                 <div class="ms-auto">
-                                    <form>
+                                    {% comment %} <form>
                                         <div class="relative">
                                             <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
                                                 <i data-lucide="search" class="z-[1] w-5 h-5 stroke-slate-400"></i>
                                             </div>
                                             <input type="search" id="productSearch" class="form-input w-52 rounded-md mt-1 border border-slate-300/60 dark:border-slate-700 dark:text-slate-300 bg-transparent px-3 py-2 focus:outline-none focus:ring-0 placeholder:text-slate-400/70 placeholder:font-normal placeholder:text-sm hover:border-slate-400 focus:border-primary-500 dark:focus:border-primary-500  dark:hover:border-slate-700 pl-10 p-2.5" placeholder="search">
                                         </div>
-                                    </form>
+                                    </form> {% endcomment %}
                                 </div>
                                 <div>
                                    
@@ -41,14 +41,14 @@
                                                 <table class="w-full">
                                                     <thead class="bg-gray-50 dark:bg-slate-700/20">
                                                         <tr>
-                                                            <th scope="col" class="p-3">
+                                                            {% comment %} <th scope="col" class="p-3">
                                                                 <label class="custom-label">
                                                                     <div class="bg-white dark:bg-slate-600/40 border border-slate-200 dark:border-slate-600 rounded w-5 h-5  inline-block  text-center -mb-[5px]">
                                                                     <input type="checkbox" class="hidden" >
                                                                     <i class="icofont-verification-check hidden text-ms text-brand-500 dark:text-slate-200 leading-5"></i>
                                                                     </div>
                                                                 </label>
-                                                            </th>
+                                                            </th> {% endcomment %}
                                                             <th scope="col" class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase">
                                                                 Product & Title
                                                             </th>
@@ -75,14 +75,14 @@
 
                                                         <!-- 1 -->                                                           
                                                         <tr class="bg-white border-b border-dashed dark:bg-gray-900 dark:border-gray-700/40">
-                                                            <td class="w-4 p-4">
+                                                            {% comment %} <td class="w-4 p-4">
                                                                 <label class="custom-label">
                                                                     <div class="bg-white dark:bg-slate-600/40 border border-slate-200 dark:border-slate-600 rounded w-5 h-5  inline-block  text-center -mb-[5px]">
                                                                     <input type="checkbox" class="hidden" >
                                                                     <i class="icofont-verification-check hidden text-ms text-brand-500 dark:text-slate-200 leading-5"></i>
                                                                     </div>
                                                                 </label>
-                                                            </td>
+                                                            </td> {% endcomment %}
                                                             <td class="p-3 text-sm font-medium whitespace-nowrap dark:text-white">
                                                                 <div class="flex items-center">
                                                                     <img src="assets/media/{{d.product_image}}" alt="" class="me-2 h-8 inline-block">
@@ -107,8 +107,8 @@
                                                             {{d.product_date}}
                                                             </td>
                                                             <td class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                                                <a href="#"><i class="icofont-ui-edit text-lg text-gray-500 dark:text-gray-400"></i></a>
-                                                                <a href="#"><box-icon name='x-circle' type='solid' ></box-icon></i></a>
+                                                                <a href="#"><box-icon name='edit' type='solid' color="purple" style="width: 18px; height: 18px;"></box-icon></i></a>
+                                                                <a href="#"><box-icon name='trash' type='solid' color="red" style="width: 18px; height: 18px; "></box-icon></a>
                                                             </td>
                                                         </tr>
                                                         {% endfor %}

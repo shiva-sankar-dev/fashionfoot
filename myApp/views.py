@@ -45,8 +45,8 @@ def customerslogout(request):
     logout(request)
     return redirect("customers-home-content")
 
-def dashboard(request):
-    return render(request,'dashboard.html')
+# def dashboard(request):
+#     return render(request,'dashboard.html')
 
 def addproduct(request):
     if request.POST:
@@ -60,7 +60,9 @@ def addproduct(request):
         productgender=request.POST['gender']
         productcolor=request.POST['color']
         productsize=request.POST['size']
-        obj=products.objects.create(product_image=productimages,product_name=productname,product_brand=productbrand,product_category=productcategory,product_desc=productdescription,product_date=productdate,product_price=productprice,product_gender=productgender,product_color=productcolor,product_size=productsize)
+        productquantity=request.POST['quantity']
+        productoffer=request.POST['productoffer']
+        obj=products.objects.create(product_image=productimages,product_name=productname,product_brand=productbrand,product_category=productcategory,product_desc=productdescription,product_date=productdate,product_price=productprice,product_gender=productgender,product_color=productcolor,product_size=productsize,number_of_items=productquantity,offer_price=productoffer)
         obj.save()
     return render(request,'admin-add-product.html')
 
@@ -709,7 +711,6 @@ def customerssinglecheckout(request,id):
     wishlistscount=wishlist.objects.filter(user_id_id=user).count()
     q=wishlist.objects.filter(user_id=user)
     profile_picure=user
-    print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")    
 
 
     try:
@@ -749,7 +750,6 @@ def customerssinglecheckout(request,id):
         savedaddress.objects.filter(user_id_id=user).delete()
         save=savedaddress.objects.create(user_id=user,f_name=first_name,l_name=last_name,d_address=Delivery_Address,h_address=Address,city=City,state=State,country=Country,zip_code=Zip_code,e_mail=Email_Address,mobile=Mobile_No)
         save.save()    
-        print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")    
         context={
         "count":count,
         "customername":customername,
@@ -855,16 +855,30 @@ def customersprofile(request):
 
     
     if 'edit-btn' in request.POST:        
-        photo=request.FILES['photo']
-        location=request.POST.get('location', None)
+        # Check if a new photo is uploaded, otherwise keep the old one
+        if 'photo' in request.FILES:
+            photo = request.FILES['photo']
+            user.img1 = photo
+        else:
+            photo = user.img1  # Retain the old image if no new image is provided
+    
+        # Fetch the previous edit object (if exists)
+        previous_edit = edit.objects.filter(user_id=user).first()
+    
+        # Check if a new location is provided, otherwise retain the old location
+        location = request.POST.get('location', None)
+        if not location and previous_edit:
+            location = previous_edit.location  # Retain the old location if no new location is provided
+    
+        # Delete the previous edit entry (optional, depending on your logic)
         edit.objects.filter(user_id=user).delete()
-        user.img1=request.FILES['photo']
+    
+        # Save the user with the updated data (only if a new image provided)
         user.save()
-        
-        edit.objects.create(user_id=user,img=photo, location=location,)
-        # user_reg.objects.create(user_id=user,img1=photo)
-        
-        
+    
+        # Create a new edit record with the new or retained location
+        edit.objects.create(user_id=user, img=photo, location=location)
+    
         return redirect("customers-profile")
 
 
