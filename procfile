@@ -1,0 +1,1 @@
+gunicorn fashionfoot.wsgi --log-file -

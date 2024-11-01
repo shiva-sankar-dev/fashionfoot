@@ -1,0 +1,108 @@
+@import "compass/css3";
+
+
+
+
+
+
+
+#breadcrumb{
+  list-style:none;
+  display: inline-block;
+  
+  .icon{
+    font-size: 14px;
+  }
+
+  
+  .list-it{
+    float:left;
+    .link-s{
+      color:black;
+      display:block;
+      background:  white;
+      text-decoration: none;
+      position:relative;
+      height: 40px;
+      line-height:40px;
+      padding: 0 10px 0 5px;
+      text-align: center;
+      margin-right: 23px;
+    }
+    &:nth-child(even){
+        .link-s{
+        background-color:white   ;
+        
+        &:before{
+          border-color:white ;
+          border-left-color:transparent;
+         }
+        &:after{
+          border-left-color:white    
+        }
+      }
+    }
+    &:first-child{
+        .link-s{
+        padding-left:15px;
+        @include border-radius(4px 0 0 4px);
+        &:before{
+          border:none;
+         }
+      }
+    }
+    &:last-child{
+        .link-s{
+        padding-right:15px;
+        @include border-radius(0 4px 4px 0);
+        &:after{
+          border:none;
+         }
+      }
+    }
+    
+    .link-s{   
+      &:before,
+      &:after{
+        content: "";
+        position:absolute;
+        top: 0;
+        border:0 solid white ;
+        border-width:20px 10px;
+        width: 0;
+        height: 0;
+      }
+      &:before{
+        left:-20px;
+        border-left-color:transparent;
+      }
+      &:after{
+        left:100%;
+        border-color:transparent;
+        border-left-color:white  ;
+      }
+      &:hover{
+        background-color: green;
+        
+        &:before{
+          border-color:green;
+          border-left-color:transparent;
+         }
+        &:after{
+          border-left-color:green;
+        }
+      }
+      &:active{
+        background-color: green-darken;
+        
+        &:before{
+          border-color:green-darken;
+          border-left-color:transparent;
+         }
+        &:after{
+          border-left-color:green-darken;
+        }
+      }
+    }
+  }
+}
