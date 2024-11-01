@@ -1,1 +1,1 @@
-web: gunicorn fashionfoot.wsgi
+web: gunicorn fashionfoot.wsgi --log-file -
