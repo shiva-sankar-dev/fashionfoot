@@ -14,10 +14,11 @@ from pathlib import Path
 import mimetypes
 import os
 
-mimetypes.add_type("text/css","css",True)
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+mimetypes.add_type("text/css", ".css", True)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -29,6 +30,7 @@ SECRET_KEY = 'django-insecure-nasp1skyk--yd1xlu891$%q3b=1u9^i5eanfzoe&0+2-0_b7bn
 DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
+
 
 
 # Application definition
@@ -134,7 +136,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS=[os.path.join(BASE_DIR,'static')]
 
-
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 MEDIA_URL='media/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'static/media')
