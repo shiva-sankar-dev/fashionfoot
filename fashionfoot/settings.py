@@ -29,8 +29,9 @@ SECRET_KEY = 'django-insecure-nasp1skyk--yd1xlu891$%q3b=1u9^i5eanfzoe&0+2-0_b7bn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['fashionfoot-production.up.railway.app', 'localhost', '127.0.0.1']
 
+CSRF_TRUSTED_ORIGINS = ['https://fashionfoot-production.up.railway.app']
 
 
 # Application definition
