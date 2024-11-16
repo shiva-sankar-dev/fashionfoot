@@ -5,11 +5,30 @@
 
   <!-- SPECIFIC CSS -->
   <link href="{% static 'assets/css/cart.css' %}" rel="stylesheet" />
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
 
   <div id="page">
     <main class="bg_gray">
+      <div class="cart-message">
+        <div class="text-center "style="z-index: 2;"> 
+          {% for msg in messages %}
+          <div class="alert alert-success alert-dismissible fade show" id="cart-alert-success" role="alert">
+              {{msg}}
+            </div>
+          {% endfor %}
+      </div>
+      </div>
+      <script>
+        document.addEventListener("DOMContentLoaded",function(){
+          const cartSuccessAlert = document.getElementById("cart-alert-success");
+          if (cartSuccessAlert) {
+            setTimeout(() => {
+              cartSuccessAlert.style.display = "none";
+            },2200)
+          }
+        });
+      </script>
+
       <div class="container margin_30">
         <!-- /page_header -->{% if count  < 1 %}
         <div class="emptycart container  ">your cart is empty</div>
@@ -35,9 +54,11 @@
               <tr>
                 <td>
                   <div class="thumb_cart">
-                    <img src="/static/media/{{ d.product_id.product_image }}" data-src="img/products/shoes/1.jpg" class="lazy" alt="Image" />
+                    <a href="{% url "product-details" d.product_id.id %}">
+                      <img src="/static/media/{{ d.product_id.product_image }}" data-src="img/products/shoes/1.jpg" class="lazy" alt="Image" />
+                    </a>
                   </div>
-                  <span class="item_cart">({{ d.product_id.product_brand }}) {{ d.product_id.product_name }}</span>
+                  <span class="item_cart">({{ d.product_id.product_brand }}) <a href="{% url "product-details" d.product_id.id %}">{{ d.product_id.product_name }}</a> </span>
                 </td>
                 <td>
                   <strong>
@@ -51,13 +72,16 @@
                   </strong>
                 </td>
                 <td>
-                  <div class="justify-content-between ">
-                 
-                    
-                    <div ><a class="fs-3 text-danger " href="{% url 'cart-decrement' d.id %}">-</a></div>
-                    <div><input type="text" value="{{ d.order_qty }}" id="quantity_1" class="qty2" name="quantity_1" /></div>
-                    <div ><a class="fs-3 text-danger " href="{% url 'cart-increment' d.id %}">+</a></div>
-                  </div>
+                    <style>
+                      .qty-wrapper{
+                      }
+                    </style>
+                    <div class="qty-wrapper">
+                      <a class="fs-3 decrement-btn" href="{% url 'cart-decrement' d.id %}"><i class="fa-solid fa-minus"></i></a>
+                      <input type="number" readonly value="{{ d.order_qty }}" id="quantity_1" class="quantity-count" name="quantity_1" />
+                      <a class="fs-3 increment-btn" href="{% url 'cart-increment' d.id %}"><i class="fa-solid fa-plus"></i></a>
+                    </div>
+                  
                 </td>
                 <td>
                   <strong>${{ d.cart_amount  }}</strong>

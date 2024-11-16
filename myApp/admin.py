@@ -11,6 +11,9 @@ admin.site.register(edit)
 admin.site.register(checkout)
 admin.site.register(wishlist)
 admin.site.register(savedaddress)
+admin.site.register(rating)
+admin.site.register(contact)
+admin.site.register(category)
 
 
 

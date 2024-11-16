@@ -12,6 +12,7 @@ urlpatterns = [
     path('customer-home/',views.customershome,name='customers-home'),
     path('customers-products/',views.customersproducts,name='customers-products'),
     path('',views.customershomecontent,name='customers-home-content'),
+    path('customerssearch/',views.customerssearch,name='customerssearch'),
     path('contact/',views.contacts,name='contact'),
     path('about/',views.about,name='about'),
     path('store/',views.store,name='store'),
@@ -34,6 +35,7 @@ urlpatterns = [
 
            
     
+    path('toggle-wishlist/', views.toggle_wishlist, name='toggle-wishlist'),
 
 
 ]

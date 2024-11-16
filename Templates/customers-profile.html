@@ -22,6 +22,23 @@
             <div class="page-wrapper relative  duration-300 pt-0 w-full">
                 <div class="xl:w-full  min-h-[calc(100vh-0px)] relative pb-0"> 
                     <div class="container my-4">
+                        <div class="text-center "style="z-index: 2;"> 
+                            {% for msg in messages %}
+                            <div class="alert alert-success alert-dismissible fade show" id="profile-alert-success" role="alert">
+                                {{msg}}
+                              </div>
+                            {% endfor %}
+                        </div>
+                        <script>
+                            document.addEventListener("DOMContentLoaded",function(){
+                                const profileSucessAlert = document.getElementById("profile-alert-success");
+                                if (profileSucessAlert){
+                                    setTimeout(() => {
+                                        profileSucessAlert.style.display = "none";
+                                    },2200);
+                                }
+                            });
+                        </script>
                         <div class="grid grid-cols-12 sm:grid-cols-12 md:grid-cols-12 lg:grid-cols-12 xl:grid-cols-12 gap-4 mb-4">
                             <div class="col-span-12 sm:col-span-12  md:col-span-12 lg:col-span-8 xl:col-span-9 ">
                                 <div class="w-full relative">
@@ -251,7 +268,7 @@
                                                   <span class="text-xl font-semibold block text-slate-800">
                                                     57
                                                   </span>
-                                                  <span class="text-sm ">Total Orders</span>
+                                                  <span class="text-sm ">{{ordercount}}</span>
                                                 </div>
                                               </div>
                                             </div> 

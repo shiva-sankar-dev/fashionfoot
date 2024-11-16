@@ -1,0 +1,201 @@
+{% extends "customers-home.html" %} {% load static %} {% block header %}
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+
+
+
+<div class="ltr:flex flex-1 rtl:flex-row-reverse">
+
+  <div class="page-wrapper relative duration-300 pt-0 w-full">
+
+    <div class="xl:w-full min-h-[calc(100vh-0px)] relative pb-0">
+
+      <div class="container my-4">
+        
+        <div class="col-span-12 sm:col-span-8 md:col-span-9 lg:col-span-9 xl:col-span-9">
+
+          <div class="grid md:grid-cols-12 lg:grid-cols-12 xl:grid-cols-12 gap-4 mb-4">
+             {% for d in data %}
+
+            <div class="sm:col-span-12 md:col-span-4 lg:col-span-3 xl:col-span-3">
+              <div class="bg-white dark:bg-gray-900 border border-slate-200 dark:border-slate-700/40 rounded-md w-full relative">
+                <div class="flex-auto text-center">
+
+
+
+
+                    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+                    {% if user.is_authenticated %}
+                    <a href="javascript:void(0);" onclick="toggleWishlist({{ d.id }})">
+                        <i id="wishlist-icon-{{ d.id }}" 
+                           style="position:absolute; right:15px; top: 17px; color:{% if d.id in wishlist_ids %}red{% else %}gray{% endif %};" 
+                           class="fs-5 fa fa-heart"></i>
+                    </a>
+                    {% else %}
+                    <a href="{% url 'user-login' %}">
+                        <i  style=" position:absolute; right:15px; color: gray;" class="fs-5    heartfor float-end mt-4  fa fa-heart"></i>
+                        </a>
+                    {% endif %}
+                
+                <!-- Move the script block outside the loop -->
+                <script>
+                    // Get CSRF token from the template
+                    const csrftoken = '{{ csrf_token }}';
+                
+                    function toggleWishlist(productId) {                
+                        $.ajax({
+                            url: "{% url 'toggle-wishlist' %}",
+                            type: "POST",
+                            data: {
+                                'product_id': productId,
+                                'csrfmiddlewaretoken': csrftoken
+                            },
+                            success: function(response) {
+                                const icon = document.getElementById(`wishlist-icon-${productId}`);
+                                if (response.added) {
+                                    icon.style.color = "red";
+                                } else {
+                                    icon.style.color = "gray";
+                                }
+                            },
+                            error: function(xhr) {
+                                console.error("Error toggling wishlist:", xhr);
+                            }
+                        });
+                    }
+                </script>
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  <div class="flex-auto text-center bg-white-100">
+                    
+                    <a href="{% url "product-details" d.id %}">
+                      <img
+                        src="/static/media/{{d.product_image}}" 
+                        
+                        alt="img"
+                        class="h-44 inline-block my-4 transition ease-in-out delay-50 hover:-translate-y-1 hover:scale-110 duration-500"/>
+                    </a>
+                  </div>
+                  <div class="flex-auto text-center p-4">
+                    <span
+                      class="focus:outline-none text-[20px] rounded font-medium py-0 px-2 mb-5 inline-block font-semibold"
+                      >{{d.product_brand}}</span>
+                    <a href="{% url "product-details" d.id %}"  style="line-height: 1.5;" class="  text-black dark:text-gray-400  block mb-2 ">{{d.product_name}}
+                    </a>
+                    <div class="mb-1">
+                      {% comment %} <span style="color:#ffcc00;" class="fa fa-star"></span> {% endcomment %}
+  
+                      {% comment %} <span class="text-slate-800 font-semibold">4.8</span> {% endcomment %}
+                  </div>
+                    <div class="mb-2">
+                      <h4 class="text-xl text-black dark:text-gray-400 leading-3 block  truncate">
+                        Size-<span class="text-slate-800 font-semibold">{{d.product_size}}</span>
+                      </h4>
+                    </div>
+                    <h4 class="text-3xl font-medium dark:text-slate-300 mb-1">
+                     
+                      <sup class="text-sm text-slate-500">$</sup>
+                       <script>                       
+                        var a=parseFloat("{{d.product_price}}");
+                        var b=parseFloat("{{d.offer_price}}");
+                        if (!isNaN(a) && !isNaN(b)){
+                          var c=a*(1-b/100)
+                          document.write(parseInt(c));
+                        }
+
+                      </script> 
+       
+                      {{c}}
+                       <del class="text-base text-slate-400">${{d.product_price}}</del>
+                    </h4>
+                   <a href="{% url "product-details" d.id %}"> <button
+                    type="button"
+                    class="px-4 py-1 lg:px-4 bg-transparent text-brand text-base transition hover:bg-brand-500/10 hover:text-brand-500 border border-slate-200 border-dashed font-medium w-full"
+                    onclick="location.href='customers-pro-details.html'">
+                    Buy Now
+                  </button></a>
+                  </div>
+                </div>
+              </div>
+              <!--end card-->
+            </div>
+            
+            {% endfor %}
+
+
+           
+
+
+
+            <!--end col-->
+          </div>
+
+          <!--end inner-grid-->
+        </div>
+
+        <!--end col-->
+        <div class="text-center  " style="">
+          <nav aria-label="Page navigation example" style="border: none;">
+              <ul class="pagination " style="border: none; ">
+      
+                  <li class="page-item {% if not data.has_previous %}disabled{% endif %}" style="border: none; ">
+                      {% if data.has_previous %}
+                      <a class="page-link text-primary"  href="?page={{ data.previous_page_number }}"
+                          aria-label="Previous">
+                          <span>&laquo;</span>
+                      </a>
+                      {% endif %}
+                  </li>
+      
+                  {% for i in data.paginator.page_range %}
+                  <li class="page-item {% if data.number == i %}{% endif %} " style="border: none; ">
+                      <a class="page-link text-primary" href="?page={{ i }}" style="border: none; ">
+                          <span style="">{{ i }}</span>
+                      </a>
+                  </li>
+                  {% endfor %}
+      
+                  <li class="page-item {% if not data.has_next %}disabled{% endif %}" style="border: none;">
+                      {% if data.has_next %}
+                      <a class="" href="?page={{ data.next_page_number }}"
+                          aria-label="Next">
+                          <span>&raquo;</span>
+                      </a>
+                      {% endif %}
+                  </li>
+      
+              </ul>
+          </nav>
+      </div>
+      
+      </div>
+      <!--end container-->
+      <!-- footer -->
+</div>
+    <!--end main-->
+  </div>
+
+  <!--end page-wrapper-->
+</div>
+<!--end div-->
+
+{% endblock %}

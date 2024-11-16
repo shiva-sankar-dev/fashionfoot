@@ -9,12 +9,42 @@
         text-align: center;
         font-size: 2em;
       }
+      {% comment %} @media(max-width:992px){
+        .wishlist-product-name{
+            max-width: 300px;
+            white-space: normal;
+            overflow-wrap: break-word;
+        }
+      } {% endcomment %}
+      img.me-2.h-8 {
+        min-width: 40px; /* Set a minimum width to prevent the image from shrinking too much */
+        height: auto; /* Maintain the aspect ratio */
+    }
       
  </style>
 <div class="ltr:flex flex-1 rtl:flex-row-reverse">
     <div class="page-wrapper relative  duration-300 pt-0 w-full">
         <div class="xl:w-full  min-h-[calc(100vh-56px)] relative pb-0"> 
             <div class="container my-4">
+                <div class="wishlist-for-message">
+                    <div class="text-center "style="z-index: 2;"> 
+                        {% for msg in messages %}
+                        <div class="alert alert-danger alert-dismissible fade show" id="wishlist-alert-success" role="alert">
+                            {{msg}}
+                          </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <script>
+                    document.addEventListener("DOMContentLoaded",function(){
+                        const wishlistSuccessAlert = document.getElementById('wishlist-alert-success');
+                        if(wishlistSuccessAlert){
+                            setTimeout(() => {
+                                wishlistSuccessAlert.style.display = "none";
+                            },2200);
+                        }
+                    });
+                </script>
                 <div class="grid grid-cols-12 sm:grid-cols-12 md:grid-cols-12 lg:grid-cols-12 xl:grid-cols-12 gap-4">  
                     <div class="col-span-12 sm:col-span-12 md:col-span-12 lg:col-span-12 xl:col-span-12">
                         <div class="grid grid-cols-1">
@@ -54,12 +84,15 @@
                                                 
                                                 <td class="p-3 text-sm font-medium whitespace-nowrap dark:text-white">
                                                     <div class="flex items-center">
-                                                        <a href="">
+                                                        <a href="{% url "product-details" data.product_id.id %}">
                                                         <img src="/static/media/{{data.product_id.product_image}}" alt="" class="me-2 h-8 inline-block" >
 
                                                         </a>
-                                                        <div class="self-center">                                                                        
-                                                            <h5 class="text-sm font-semibold text-slate-700 dark:text-gray-400">{{data.product_id.product_name}}</h5>
+                                                        <div class="self-center">    
+                                                            <a href="{% url "product-details" data.product_id.id %}">
+                                                                <h5 class="text-sm wishlist-product-name font-semibold text-slate-700 dark:text-gray-400">{{data.product_id.product_name}}</h5>
+                                                            </a>                                                                    
+                                                            
                                                             <span class="block  font-medium text-slate-500">Size-{{data.product_id.product_size}}</span>
                                                         </div>
                                                     </div>

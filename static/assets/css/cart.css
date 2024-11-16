@@ -64,6 +64,7 @@
   .table.cart-list tr {
     border: 1px solid #ddd;
   }
+
 }
 @media (max-width: 767px) and (max-width: 991px) {
   .table.cart-list tr {
@@ -112,7 +113,6 @@
 .thumb_cart {
   width: 60px;
   height: 60px;
-  overflow: hidden;
   margin-right: 10px;
   float: left;
   position: relative;
@@ -133,8 +133,9 @@
   transform: translate(-50%, -50%) scale(1.1);
 }
 @media (max-width: 991px) {
-  .thumb_cart {
-    display: none;
+
+  .table.cart-list td:nth-of-type(1){
+    height: 87px;
   }
 }
 .item_cart {
@@ -213,3 +214,31 @@
   text-align: center;
   font-size: 2em;
 }
+
+.qty-wrapper {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important; /* Space between the elements */
+}
+
+.qty-wrapper .decrement-btn,
+.qty-wrapper .increment-btn {
+    font-size: 1rem !important; /* Adjust the font size as needed */
+    color: rgb(99, 99, 99) !important; /* Bootstrap's "text-danger" color */
+    cursor: pointer !important;
+    text-decoration: none !important; /* Remove underline */
+}
+
+.quantity-count {
+    text-align: center !important;
+    width: 50px !important; /* Adjust width as needed */
+    padding: 5px !important;
+    background-color: #ffffff;
+}
+/* @media(max-width:420px){
+  .increment-btn, .decrement-btn{
+    visibility: hidden;
+    position: absolute;
+    transition: none;
+  }
+} */
