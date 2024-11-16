@@ -33,7 +33,7 @@ ALLOWED_HOSTS = ['fashionfoot-production.up.railway.app', 'localhost', '127.0.0.
 
 CSRF_TRUSTED_ORIGINS = ['https://fashionfoot-production.up.railway.app']
 
-
+port = os.environ.get('PORT', '8080')
 # Application definition
 
 INSTALLED_APPS = [
