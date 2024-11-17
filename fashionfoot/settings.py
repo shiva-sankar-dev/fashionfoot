@@ -34,6 +34,17 @@ ALLOWED_HOSTS = ['fashionfoot-production.up.railway.app', 'localhost', '127.0.0.
 CSRF_TRUSTED_ORIGINS = ['https://fashionfoot-production.up.railway.app']
 
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Database-backed sessions
+
+
+SESSION_COOKIE_DOMAIN = 'fashionfoot-production.up.railway.app'
+CSRF_COOKIE_DOMAIN = 'fashionfoot-production.up.railway.app'
+
+
+SESSION_COOKIE_SECURE = True  # Use True if using HTTPS
+CSRF_COOKIE_SECURE = True     # Use True if using HTTPS
+
+
 # Application definition
 
 INSTALLED_APPS = [
